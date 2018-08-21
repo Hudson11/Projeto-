@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Projeto **</title>
+            </f:facet>
+        </h:head>
+
+        <h:outputStylesheet library="css" name="css2.min.css"/>
+
+
+        <h:body>
+            <h:form id="up">
+                <p:layout fullPage="true">
+
+                    <p:layoutUnit position="north" size="200" resizable="true" closable="true" collapsible="true">
+                        <h:graphicImage value="/resources/images/topo2.png" width="1350px" height="174px"/>
+                    </p:layoutUnit>
+
+
+
+                    <p:layoutUnit position="west" size="175" header="Minimizar" collapsible="true">
+                        <p:menu>
+                            <p:submenu label="Gerenciar">
+                                <p:menuitem value="Livros" outcome="AbaLivroGerente.xhtml"/>
+                                <p:menuitem value="Filmes" outcome="AbaFilmeGerente.xhtml"/>
+                            </p:submenu>
+                        </p:menu>
+                    </p:layoutUnit>
+
+
+                    <p:layoutUnit position="center">
+                        
+                        <center> Cadastrar Novo Filme </center>
+
+                        <h:panelGrid columns="2" columnClasses="label, value">
+                            <h:outputText value="Nome: *" />
+                            <h:inputText value="#{gerenciaProduto.livro.nome}" required="true" label="Nome"/>
+
+                            <h:outputText value="Autor: *" />
+                            <h:inputText value="#{gerenciaProduto.livro.autor}" required="true" label="Email"/>
+
+                            <h:outputText value="Data de Publicação: " />
+                            <h:inputText value="#{gerenciaProduto.livro.dataPublicacao}" required="true" label="Cpf">
+                                <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+                            </h:inputText>
+                            <h:outputText value="Quantidade: " />
+                            <h:inputText value="#{gerenciaProduto.livro.quantidade}" >
+                                <f:validateDoubleRange minimum="1" > </f:validateDoubleRange>
+                            </h:inputText>
+
+                            <h:outputText value="valor Unitário: " />
+                            <h:inputText value="#{gerenciaProduto.livro.valor}" >
+                                <f:validateDoubleRange minimum="1" > </f:validateDoubleRange>
+                            </h:inputText>
+
+                            <h:outputText value="Descrição: " />
+                            <h:inputTextarea value="#{gerenciaProduto.livro.descricao}" >
+                                <f:validateLength minimum="10"></f:validateLength>
+                            </h:inputTextarea>
+                            
+                            <p:commandButton value="Cadastrar" action="#{gerenciaProduto.cadastraLivro()}" update=":up"/>
+                            <p:button value="Voltar" outcome="PaginaGerente.xhtml"></p:button>
+                        </h:panelGrid>
+                        
+                        
+                        <p:growl id="messages"/>
+
+                        <p:menubar style="background-color: #4F94CD">
+                            <p:submenu label="Acessar">
+                                <p:menuitem value="Perfil" outcome="/AbaFilme.xhtml"/>                               
+                                <p:menuitem value="Sair" outcome="/AbaLivro.xhtml"/>
+                            </p:submenu>    
+
+                            <f:facet name="options">
+                                <p:inputText style="margin-right:10px" placeholder="Search"/>
+                                <p:button value="Logout" outcome="/Login.xhtml"></p:button>
+                            </f:facet>
+                        </p:menubar>
+
+                        <p:dataTable value="#{gerenciaProduto.listaLivro}" var="produto">
+                            <p:column>
+                                <f:facet name="header"> Id </f:facet>
+                                    #{produto.id}
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header"> Nome </f:facet>
+                                    #{produto.nome}
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header"> Autor </f:facet>
+                                    #{produto.autor}
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header"> valor </f:facet>
+                                    #{produto.valor}
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header"> Quantidade </f:facet>
+                                    #{produto.quantidade}
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header"> Data de Publicação </f:facet>
+                                    #{produto.dataPublicacao}
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header"> Descrição </f:facet>
+                                    #{produto.descricao}
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header"></f:facet>
+                                <p:commandButton value="Remover" action="#{gerenciaProduto.removerLivro(produto)}"/>
+                            </p:column>
+                        </p:dataTable>
+
+
+
+                    </p:layoutUnit>
+                </p:layout>
+
+                <div id="base">
+                    <h3 id="font"> Desenvolvido por: Hudson Silva </h3>
+                </div>
+            </h:form>        
+        </h:body>
+    </f:view>
+</html>
+

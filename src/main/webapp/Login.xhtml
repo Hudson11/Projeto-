@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+                 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+                <title>Projeto **</title>
+            </f:facet>
+        </h:head>
+        
+        <h:outputStylesheet library="css" name="css2.css"/>
+        <h:outputStylesheet library="css" name="css2.min.css"/>
+        <h:outputStylesheet library="materialize/css2" name="materialize.css"/>
+        
+        <h:body>
+            <p:growl id="growl"/>
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="200" resizable="true" closable="true" collapsible="true">
+                    <h:graphicImage value="/resources/images/topo2.png" width="1350px" height="174px"/>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    
+                <div id="container">
+                   
+                    <center>
+                    <h2><p:outputLabel value=" Seu Cadastro !" style="color:#1E90FF"/></h2>
+                    <p:outputLabel value=" Você precisa ser cadastrado ou ter um cadastro para continuar"/>
+                    <br/>
+                    <br/>
+                    <div id="toolbar">
+                        <p:outputLabel value=" -Já é cadastrado ?" style="color:white; font-size: 27px" /><br/>
+                        <p:outputLabel value=" -Então entre com seus dados de Email e Senha" style="color:white; font-size: 15px"/>
+                    </div>
+                        
+                        <h:form>
+                        <p:outputLabel value=" Email e senha Obrigatórios para o Login" style="font-size: 15px"/> <br/>
+                        <h2><p:outputLabel value="Dados Pessoais" style="color: #1E90FF; font-size: 27px" /></h2>
+                        <div id="login">
+                            <h:panelGrid>
+                                
+                                <p:outputLabel value="Usuário: "/>
+                                <h:inputText value="#{gerenciaUsuario.t.username}" required="true" label="Email"/>
+                            
+                                <p:outputLabel value="Senha: "/>
+                                <h:inputSecret value="#{gerenciaUsuario.t.senha}" required="true" label="Senha"/><br/>
+                            
+                            </h:panelGrid>
+                        </div>
+                        
+                            <p:commandButton value="Acessar" action="#{gerenciaUsuario.Login(gerenciaUsuario.t.username, gerenciaUsuario.t.senha)}" update=":growl"/>
+                            <p:button value="Cadastrar" outcome="/CadastroCliente.xhtml"></p:button>
+                           
+                        </h:form>
+                        
+                    </center>
+                </div>
+                    
+                </p:layoutUnit>
+                
+            </p:layout>
+        </h:body>
+    </f:view>
+</html>
+

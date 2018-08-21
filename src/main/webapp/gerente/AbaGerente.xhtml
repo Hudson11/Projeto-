@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>PrimeFaces</title>
+            </f:facet>
+        </h:head>
+
+        <h:outputStylesheet library="css" name="css2.min.css"/>
+        
+
+        <h:body>
+            <h:form id="for">
+            
+            <p:growl id="message"/>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="200" resizable="true" closable="true" collapsible="true">
+                    <h:graphicImage value="/resources/images/topo2.png" width="1350px" height="174px"/>
+                </p:layoutUnit>
+
+
+                <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
+                    <p:menu>
+                        <p:submenu label="Gerenciar">
+                            <p:menuitem value="Livros" url="AbaLivroGerente.xhtml" />
+                            <p:menuitem value="Filmes" url="AbaFilmeGerente.xhtml" />
+                            <p:menuitem value="Gerentes" url="AbaGerente.xhtml" />
+                        </p:submenu>
+
+                    </p:menu>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+
+
+                    <div id ="border-one">                       
+                        <p:menubar style="background-color: #4F94CD">
+                            <p:submenu label="Acessar">
+                                <p:menuitem value="Perfil" outcome="/gerente/PerfilGerente.xhtml"/>
+                                <p:menuitem value="Carrinho" outcome="/gerente/PerfilGerente.xhtml"/>
+                            </p:submenu>    
+                        </p:menubar>
+
+                    </div>
+
+
+
+                    <h:panelGrid columns="2" columnClasses="label, value">
+
+                        <h:outputText value="Nome: *" />
+                        <h:inputText value="#{gerenciaUsuario.g.nome}" required="true" label="Nome"/>
+
+                        <h:outputText value="Email: *" />
+                        <h:inputText value="#{gerenciaUsuario.g.email}" required="true" label="Email"/>
+
+                        <h:outputText value="Cpf: " />
+                        <h:inputText value="#{gerenciaUsuario.g.cpf}" required="true" label="Cpf">
+                            <f:validateLength minimum="11" > </f:validateLength>
+                        </h:inputText>
+
+                        <h:outputText value="Senha: " />
+                        <h:inputSecret value="#{gerenciaUsuario.t.senha}" >
+                            <f:validateLength minimum="5" > </f:validateLength>
+                        </h:inputSecret>
+
+                        <h:outputText value="User Name: " />
+                        <h:inputText value="#{gerenciaUsuario.t.username}" >
+                            <f:validateLength minimum="5" > </f:validateLength>
+                        </h:inputText>
+                        
+                        <p:commandButton value="Submit" action="#{gerenciaUsuario.CadastraGerente()}" update=":for"/>
+                        <p:button value="voltar" outcome="PaginaGerente.xhtml"/>
+
+                    </h:panelGrid>
+
+
+
+
+                    <h:panelGrid>
+                        <p:dataTable value="#{gerenciaUsuario.listaGerente}" var="cliente">
+                            <p:column> 
+                                <f:facet name="header">Id</f:facet>
+                                    #{cliente.id}
+                            </p:column>
+                            <p:column> 
+                                <f:facet name="header">Nome</f:facet>
+                                    #{cliente.nome}
+                            </p:column>
+                            <p:column> 
+                                <f:facet name="header">Email</f:facet>
+                                    #{cliente.email}
+                            </p:column>
+                            <p:column> 
+                                <f:facet name="header">Cpf</f:facet>
+                                    #{cliente.cpf}
+                            </p:column>
+                            <p:column> 
+                                <f:facet name="header">Cpf</f:facet>
+                                <p:commandButton value="Remover" action="#{gerenciaUsuario.removerGerentePermanente(cliente)}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </h:panelGrid>
+
+                </p:layoutUnit>
+
+            </p:layout>
+            </h:form>
+        </h:body>
+
+    </f:view>
+</html>
+

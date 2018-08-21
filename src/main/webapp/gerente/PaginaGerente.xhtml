@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>PrimeFaces</title>
+            </f:facet>
+        </h:head>
+        
+        <h:outputStylesheet library="css" name="css2.min.css"/>
+        <h:outputStylesheet library="materialize/css2" name="materialize.min.css"/>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="200" resizable="true" closable="true" collapsible="true">
+                    <h:graphicImage value="/resources/images/topo2.png" width="1350px" height="174px"/>
+                </p:layoutUnit>
+                
+
+                <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
+                    <p:menu>
+                        <p:submenu label="Gerenciar">
+                            <p:menuitem value="Livros" url="AbaLivroGerente.xhtml" />
+                            <p:menuitem value="Filmes" url="AbaFilmeGerente.xhtml" />
+                            <p:menuitem value="Gerentes" url="AbaGerente.xhtml" />
+                        </p:submenu>
+
+                    </p:menu>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    
+                    
+                    <div id ="border-one">                       
+                        <p:menubar style="background-color: #4F94CD">
+                            <p:submenu label="Acessar">
+                                <p:menuitem value="Perfil" outcome="PerfilGerente.xhtml"/>
+                                <p:menuitem value="Carrinho" outcome="PerfilGerente.xhtml"/>
+                            </p:submenu>    
+                        </p:menubar>
+                        
+                    </div>
+                    
+                    <h:panelGrid>
+                        
+                    </h:panelGrid>
+                    
+                    
+                    
+                    <h:panelGrid>
+                        <p:dataTable value="#{gerenciaUsuario.listaCliente}" var="cliente">
+                            <p:column> 
+                                <f:facet name="header">Id</f:facet>
+                                #{cliente.id}
+                            </p:column>
+                            <p:column> 
+                                <f:facet name="header">Nome</f:facet>
+                                #{cliente.nome}
+                            </p:column>
+                            <p:column> 
+                                <f:facet name="header">Email</f:facet>
+                                #{cliente.email}
+                            </p:column>
+                            <p:column> 
+                                <f:facet name="header">Cpf</f:facet>
+                                #{cliente.cpf}
+                            </p:column>
+                            
+                        </p:dataTable>
+                    </h:panelGrid>
+                    
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>
+

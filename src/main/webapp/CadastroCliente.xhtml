@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+            <title>Projeto **</title>
+        </h:head>
+
+        <h:outputStylesheet library="materialize/css2" name="materialize.min.css"/>
+        <h:outputStylesheet library="css" name="css2.css"/>
+        <h:outputStylesheet library="css" name="css2.min.css"/>
+
+        <h:body>
+
+            <p:growl id="message"/>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="200" resizable="true" closable="true" collapsible="true">
+                    <h:graphicImage value="/resources/images/topo2.png" width="1350px" height="174px"/>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+
+                    <h:form>
+
+                        <p:growl id="growl" sticky="true" showDetail="true"/>
+
+                        <p:wizard flowListener="#{userWizard.onFlowProcess}">
+                            <p:tab id="personal" title="Dados Pessoas">
+                                <p:panel header="Detalhes Pessoais">
+                                    <p:messages />
+                                    <div id="login1">
+                                        <h:panelGrid columns="2" columnClasses="label, value">
+                                            <h:outputText value="Nome: *" />
+                                            <h:inputText value="#{gerenciaUsuario.c.nome}" required="true" label="Nome"/>
+
+                                            <h:outputText value="Email: *" />
+                                            <h:inputText value="#{gerenciaUsuario.c.email}" required="true" label="Email"/>
+
+                                            <h:outputText value="Cpf: " />
+                                            <h:inputText value="#{gerenciaUsuario.c.cpf}" required="true" label="Cpf"/>
+                                        </h:panelGrid>
+                                    </div>
+                                </p:panel>
+                            </p:tab>
+
+                            <p:tab id="address" title="Definir Acesso">
+                                <p:panel header="Senha">
+                                    <p:messages />
+                                    <div id="login2">
+                                        <h:panelGrid columns="2" columnClasses="label, value">
+                                            <h:outputText value="Senha: " />
+                                            <h:inputSecret value="#{gerenciaUsuario.t.senha}" />
+
+                                            <h:outputText value="Repete Senha: " />
+                                            <h:inputText value="#{gerenciaUsuario.t.username}" />
+                                        </h:panelGrid>
+                                    </div>
+                                </p:panel>
+                            </p:tab>
+
+                            <p:tab id="confirm" title="Confirmar Cadastro">
+                                <p:panel header="Confirmation">
+                                    <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid">
+                                        <h:panelGrid columns="2" columnClasses="label, value">
+                                            <h:outputText value="Nome: " />
+                                            <h:outputText value="#{gerenciaUsuario.c.nome}" styleClass="outputLabel"/>
+
+                                            <h:outputText value="Email: " />
+                                            <h:outputText value="#{gerenciaUsuario.c.email}" styleClass="outputLabel"/>
+
+                                            <h:outputText value="Cpf: " />
+                                            <h:outputText value="#{gerenciaUsuario.c.cpf}" styleClass="outputLabel"/>
+
+                                            <h:outputText value="UserName: " />
+                                            <h:outputText value="#{gerenciaUsuario.t.username}" styleClass="outputLabel"/>
+                                        </h:panelGrid>
+                                    </h:panelGrid>
+
+                                    <p:commandButton value="Submit" action="#{gerenciaUsuario.CadastraCliente()}" update=":message"/>
+                                </p:panel>
+                            </p:tab>
+                        </p:wizard>
+
+                        <p:button value="Voltar" outcome="Login.xhtml"></p:button>
+                    </h:form>
+
+                </p:layoutUnit>
+
+            </p:layout>
+        </h:body>
+    </f:view>
+</html>
+
