@@ -25,8 +25,7 @@ import org.hibernate.Session;
 
 
 /**
- *
- * @author Hudson
+ * * @author Hudson
  */
 
 @ManagedBean
